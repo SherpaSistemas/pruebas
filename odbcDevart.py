@@ -22,7 +22,7 @@ cursorSQL = conn.cursor()
 cursor.execute("SELECT * FROM momast")
 rows = cursor.fetchall()#[:10]
 
-cursorSQL.execute("DELETE FROM dbo.momast")
+cursorSQL.execute("TRUNCATE TABLE dbo.momast")
 cursorSQL.commit()
 
 # Nombres de los campos
