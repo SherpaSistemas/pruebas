@@ -19,10 +19,10 @@ cursor = cnxn.cursor()
 conn = pyodbc.connect('DSN=OdooSQL;Trusted_Connection=yes;')
 cursorSQL = conn.cursor()
 
-cursor.execute("SELECT * FROM momast")
+cursor.execute("SELECT * FROM momast") #NOMBRE DE LA TABLA EN winmagi
 rows = cursor.fetchall()#[:10]
 
-cursorSQL.execute("DELETE FROM dbo.momast")
+cursorSQL.execute("TRUNCATE TABLE dbo.momast") #NOMBRE DE LA TABLA EN mssql
 cursorSQL.commit()
 
 # Nombres de los campos

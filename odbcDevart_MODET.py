@@ -19,10 +19,10 @@ cursor = cnxn.cursor()
 conn = pyodbc.connect('DSN=OdooSQL;Trusted_Connection=yes;')
 cursorSQL = conn.cursor()
 
-cursor.execute("SELECT * FROM momast")
+cursor.execute("SELECT * FROM modet")
 rows = cursor.fetchall()#[:10]
 
-cursorSQL.execute("TRUNCATE TABLE dbo.momast")
+cursorSQL.execute("DELETE FROM dbo.modet")
 cursorSQL.commit()
 
 # Nombres de los campos
@@ -32,7 +32,7 @@ print(columns)
 n=1
 for row in rows:
     # print(row)
-    cursorSQL.execute("INSERT INTO dbo.momast (id,mono,whse,motype,status,statdate,project,entrydate,comments,selected) VALUES (?,?,?,?,?,?,?,?,?,?)",n,row[0],row[1],row[2],row[3],row[4],row[5],row[6],row[7],row[8])
+    cursorSQL.execute("INSERT INTO dbo.modet (id,mono,whse,motype,status,statdate,project,entrydate,comments,selected) VALUES (?,?,?,?,?,?,?,?,?,?)",n,row[0],row[1],row[2],row[3],row[4],row[5],row[6],row[7],row[8])
     # cursorSQL.execute("INSERT INTO dbo.momast (id,mono) VALUES (?,?)",n,row[0])
     n+=1
 cursorSQL.commit()
@@ -56,6 +56,4 @@ conn.close()
 cursor.close()
 cnxn.close()
 
-
- #prb
 
