@@ -32,7 +32,7 @@ print(columns)
 n=1
 for row in rows:
     # print(row)
-    cursorSQL.execute("INSERT INTO dbo.modet (mono,lineitem,pn,desc,duedate,qtyord,qtyrcd,status,statdate,orddate,startdate,reference,pegtype,pegorder,pegline,hold,rework,priority,pritype,colsize,colorcode,printflag,remarks,firm,expedite,expnotes,selected,requestor,reqno,fsmat,fslab,fsfod,fsvod,fspsvc,fsscrp,nothist,cavity,heat,lot,rtgid,revision,altpn)VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",n,row[0],row[1],row[2],row[3],row[4],row[5],row[6],row[7],row[8], row[9], row[10],row[11],row[12],row[13],row[14],row[15],row[16],row[17],row[18],row[19], row[20], row[21], row[22],row[23],row[24],row[25],row[26],row[27],row[28],row[29],row[30], row[31], row[32], row[33],row[34],row[35],row[36],row[37],row[38],row[39],row[40],row[41], row[42])
+    cursorSQL.execute("INSERT INTO dbo.modet (mono,lineitem,pn,desc,duedate,qtyord,qtyrcd,status,statdate,orddate,startdate,reference,pegtype,pegorder,pegline,hold,rework,priority,pritype,colsize,colorcode,printflag,remarks,firm,expedite,expnotes,selected,requestor,reqno,fsmat,fslab,fsfod,fsvod,fspsvc,fsscrp,nothist,cavity,heat,lot,rtgid,revision,altpn)VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",n,row[0],row[1],row[2],row[3],row[4],row[5],row[6],row[7],row[8], row[9], row[10],row[11],row[12],row[13],row[14],row[15],row[16],row[17],row[18],row[19], row[20], row[21], row[22],row[23],row[24],row[25],row[26],row[27],row[28],row[29],row[30], row[31], row[32], row[33],row[34],row[35],row[36],row[37],row[38],row[39],row[40],row[41])
     # cursorSQL.execute("INSERT INTO dbo.modet (id,mono) VALUES (?,?)",n,row[0])
     n+=1
 cursorSQL.commit()
