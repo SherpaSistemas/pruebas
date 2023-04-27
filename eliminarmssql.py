@@ -1,4 +1,5 @@
 import pyodbc 
+#soyDani haciendo pruebas
 
 # Conectarse a la base de datos
 server = 'localhost'
@@ -22,4 +23,8 @@ conn.commit()
 # Cerrar la conexión
 conn.close()
 
+<<<<<<< HEAD
 #ksdfksd<fks<dkdsfkh
+=======
+#hola soy daniela
+>>>>>>> 5dc7d5492a4bc4fe137674ec070c021738cdb548
