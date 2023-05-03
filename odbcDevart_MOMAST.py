@@ -1,7 +1,7 @@
 import pyodbc
 
 # create a connection string
-# cnxn_str = "Driver={SQL Server};Server=localhost;Database=db_odoo;Trusted_Connection=yes;"
+# cnxn_str = "Driver={SQL Server};Server=localhost;Database=PROD;Trusted_Connection=yes;"
 cnxn_str = (
         "Driver={Devart ODBC Driver for xBase};"
         "DBFFormat=VisualFoxPro;"
@@ -16,24 +16,28 @@ cnxn = pyodbc.connect(cnxn_str)
 cursor = cnxn.cursor()
 
 # conexion y cursor SQL
-conn = pyodbc.connect('DSN=OdooSQL;Trusted_Connection=yes;')
+conn = pyodbc.connect('DSN=OdooSQL;Trusted_Connection=yes;Database=PROD;')
 cursorSQL = conn.cursor()
 
 cursor.execute("SELECT * FROM momast") #NOMBRE DE LA TABLA EN winmagi
-rows = cursor.fetchall()#[:10]
+rows = cursor.fetchall()[:20]
 
 cursorSQL.execute("TRUNCATE TABLE dbo.momast") #NOMBRE DE LA TABLA EN mssql
 cursorSQL.commit()
 
 # Nombres de los campos
+# índices de las columnas que deseas recuperar
+#indices = [1, 3, 5, 6]  
+#columns = [cursor.description[i][0] for i in indices]
+
 columns = [column[0] for column in cursor.description]
 print(columns)
 
 n=1
 for row in rows:
-    # print(row)
-    cursorSQL.execute("INSERT INTO dbo.momast (id,mono,whse,motype,status,statdate,project,entrydate,comments,selected) VALUES (?,?,?,?,?,?,?,?,?,?)",n,row[0],row[1],row[2],row[3],row[4],row[5],row[6],row[7],row[8])
-    # cursorSQL.execute("INSERT INTO dbo.momast (id,mono) VALUES (?,?)",n,row[0])
+    print("",n,"  -------------> ",row)
+    cursorSQL.execute("INSERT INTO dbo.momast (mono,whse,motype,status,statdate,project,entrydate,comments,selected) VALUES (?,?,?,?,?,?,?,?,?)",row[0],row[1],row[2],row[3],row[4],row[5],row[6],row[7],row[8])
+    # cursorSQL.execute("INSERT INTO dbo.momastt (mono) VALUES (?)",row[0])
     n+=1
 cursorSQL.commit()
 

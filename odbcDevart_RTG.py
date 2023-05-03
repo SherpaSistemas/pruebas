@@ -16,11 +16,11 @@ cnxn = pyodbc.connect(cnxn_str)
 cursor = cnxn.cursor()
 
 # conexion y cursor SQL
-conn = pyodbc.connect('DSN=OdooSQL;Trusted_Connection=yes;')
+conn = pyodbc.connect('DSN=OdooSQL;Trusted_Connection=yes;Database=PROD;')
 cursorSQL = conn.cursor()
 
 cursor.execute("SELECT * FROM rtg") #NOMBRE DE LA TABLA EN winmagi
-rows = cursor.fetchall()#[:10]
+rows = cursor.fetchall()[:15]
 
 cursorSQL.execute("TRUNCATE TABLE dbo.rtg") #NOMBRE DE LA TABLA EN mssql
 cursorSQL.commit()
@@ -31,11 +31,10 @@ print(columns)
 
 n=1
 for row in rows:
-    # print(row)
-    cursorSQL.execute("INSERT INTO dbo.rtg (PN,OPNDESC,RTGID,OPNSEQ,OPN,WC,SUHR,RUNHR,EFFICIENCY,EXTDESC,RESOURCES,REVIN,EFFIN,REVOUT,EFFOUT,TOOLING,PURSVC,PURSVCPN,PURSVCLT,PURSVCMULT,PURSVCPL,PURSVCPO,VENDOR,SHIPPER,MOLDID,SYSTEMGEN,RUNQTY,LABHR,FLUSHLAB,RUNAHEAD,RUNAHEADQT,COPRODDISC,PURSVCPREM,MAXLOGON,UPDATEDBY,UPDATEON,LABCODE,WCMACH,RTGCTLCODE,SHIPID,MOVETOWC,TESTCODE,) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",n,
-                      row[0],row[1],row[2],row[3],row[4],row[5],row[6],row[7],row[8], row[9], row[10],row[11],row[12],row[13],row[14],row[15],row[16],row[17],row[18],row[19], row[20], row[21], row[22],row[23],row[24],row[25],row[26],row[27],row[28],row[29],row[30], row[31], row[32], row[33],row[34],row[35],row[36],row[37],row[38],row[39],row[40],row[41])
-    # cursorSQL.execute("INSERT INTO dbo.momast (id,mono) VALUES (?,?)",n,row[0])
-    n+=1
+     print("",n,"  -------------> ",row)
+     cursorSQL.execute("INSERT INTO dbo.rtg (PN,opndesc,RTGID,OPNSEQ,OPN,WC,SUHR,RUNHR,EFFICIENCY,extdesc,RESOURCES,REVIN,EFFIN,REVOUT,EFFOUT,TOOLING,PURSVC,PURSVCPN,PURSVCLT,PURSVCMULT,PURSVCPL,PURSVCPO,VENDOR,SHIPPER,MOLDID,SYSTEMGEN,RUNQTY,LABHR,FLUSHLAB,RUNAHEAD,RUNAHEADQT,COPRODDISC,PURSVCPREM,MAXLOGON,UPDATEDBY,UPDATEON,LABCODE,WCMACH,RTGCTLCODE,SHIPID,MOVETOWC,TESTCODE) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",row[0],row[1],row[2],row[3],row[4],row[5],row[6],row[7],row[8], row[9], row[10],row[11],row[12],row[13],row[14],row[15],row[16],row[17],row[18],row[19], row[20], row[21], row[22],row[23],row[24],row[25],row[26],row[27],row[28],row[29],row[30], row[31], row[32], row[33],row[34],row[35],row[36],row[37],row[38],row[39],row[40],row[41])
+     # cursorSQL.execute("INSERT INTO dbo.rtg (pn) VALUES (?)",row[0])
+     n+=1
 cursorSQL.commit()
 
 ###########################    TABLA MOMAST    ###################################
