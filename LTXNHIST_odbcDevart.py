@@ -20,7 +20,7 @@ conn = pyodbc.connect('DSN=OdooSQL;Trusted_Connection=yes;Database=PROD;')
 cursorSQL = conn.cursor()
 
 cursor.execute("SELECT * FROM ltxnhist") #NOMBRE DE LA TABLA EN winmagi
-rows = cursor.fetchall()[:15]
+rows = cursor.fetchall()[:5]
 
 cursorSQL.execute("TRUNCATE TABLE dbo.ltxnhist")#NOMBRE DE LA TABLA EN mssql
 cursorSQL.commit()

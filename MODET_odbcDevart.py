@@ -20,7 +20,7 @@ conn = pyodbc.connect('DSN=OdooSQL;Trusted_Connection=yes;Database=PROD;')
 cursorSQL = conn.cursor()
 
 cursor.execute("SELECT * FROM modet") #NOMBRE DE LA TABLA EN winmagi
-rows = cursor.fetchall()[:20]
+rows = cursor.fetchall()[:10]
 
 cursorSQL.execute("TRUNCATE TABLE dbo.modet")#NOMBRE DE LA TABLA EN mssql
 cursorSQL.commit()
