@@ -23,8 +23,4 @@ conn.commit()
 # Cerrar la conexión
 conn.close()
 
-<<<<<<< HEAD
-#ksdfksd<fks<dkdsfkh
-=======
-#hola soy daniela
->>>>>>> 5dc7d5492a4bc4fe137674ec070c021738cdb548
+# se crearon las ramas
