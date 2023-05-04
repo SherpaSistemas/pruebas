@@ -24,3 +24,5 @@ conn.commit()
 conn.close()
 
 # se crearon las ramas
+
+#Uriel elimino la clase creaciónPdfyQr que estaba en la rama MAIN y creo la clase pdCreacion en la rama QR 
