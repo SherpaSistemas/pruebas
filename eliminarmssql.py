@@ -26,3 +26,4 @@ conn.close()
 # se crearon las ramas
 
 #Uriel elimino la clase creaciónPdfyQr que estaba en la rama MAIN y creo la clase pdCreacion en la rama QR 
+#Daniela elimino la clase odbcDevart_INV que estaba en la rama MAIN y creo la clase INV_odbc.py en la rama Migracion
