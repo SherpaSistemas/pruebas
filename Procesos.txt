@@ -1,3 +1,4 @@
 # Milton creo las ramas QR y MigracionDB.....ok 
 # Uriel elimino la clase creaciónPdfyQr que estaba en la rama MAIN y creo la clase pdCreacion en la rama QR....ok 
 # Daniela elimino la clase odbcDevart_INV que estaba en la rama MAIN y creo la clase INV_odbc.py en la rama Migracion...ok
+# Daniela elimino la clase odbcDevart_LTXNHIS que estaba en la rama Migracion y creo la clase LTXNHIS_odbc.py en la rama Migracion...ok
