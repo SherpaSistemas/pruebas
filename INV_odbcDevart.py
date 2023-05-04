@@ -1,6 +1,6 @@
 import pyodbc
 
-# create a connection string
+# create a connection string luki
 # cnxn_str = "Driver={SQL Server};Server=localhost;Database=db_odoo;Trusted_Connection=yes;"
 cnxn_str = (
         "Driver={Devart ODBC Driver for xBase};"
