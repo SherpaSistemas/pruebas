@@ -1,0 +1,2 @@
+# rama feature/QR 
+# se eliminaron clases inutilizables
