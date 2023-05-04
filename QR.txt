@@ -1,1 +1,3 @@
-# rama feature/QR
+# rama feature/QR 
+# se eliminaron clases inutilizables
+>>>>>>> e8a16e1074f2ff1941344087139bc08fe5b8fbd9
