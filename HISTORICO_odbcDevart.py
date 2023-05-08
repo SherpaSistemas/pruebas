@@ -40,7 +40,6 @@ for row in rows:
      
      # cursorSQL.execute("INSERT INTO dbo.ltxnhist (clock,logondate) VALUES (?,?)",row[0],row[1])
    
-    
      n+=1
 cursorSQL.commit()
 
