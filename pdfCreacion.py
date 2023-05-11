@@ -23,10 +23,21 @@ class PDF(FPDF):
         self.set_text_color(220,50,50)
         self.multi_cell(w=210.0,h=40.0,align='c', txt=title, border=0)
 
+x=0
 
+#-------------------------x=x+i;
+#----------------------img.save("pruebas/imagenes/"x".png")
 qr=QRCode(version=3, box_size=5, border=2)
 
-qr.add_data(1)
+for i in range(1,4):
+    qr.add_data(i)
+    qr.make(fit=True)
+    img=qr.make_image(fill_color=(0,0,0),back_color=(255,255,255))
+    x=x+i
+    img.save("pruebas/imagenes/'x'.png")
+    qr.clear()
+
+"""qr.add_data(1)
 qr.make(fit=True)
 img=qr.make_image(fill_color=(0,0,0),back_color=(255,255,255))
 img.save("pruebas/imagenes/hola1.png")
@@ -306,8 +317,7 @@ qr.add_data(46)
 qr.make(fit=True)
 img=qr.make_image(fill_color=(0,0,0),back_color=(255,255,255))
 
-#-------------------------x=x+i;
-#----------------------img.save("pruebas/imagenes/"x".png")
+
 img.save("pruebas/imagenes/hola46.png")
 qr.clear()
 
@@ -821,11 +831,8 @@ qr.add_data(130)
 qr.make(fit=True)
 img=qr.make_image(fill_color=(0,0,0),back_color=(255,255,255))
 img.save("pruebas/imagenes/hola130.png")
-qr.clear()
+qr.clear()"""
 #print('-----------------TERMINA TRECEAVO BLOQUE----------------------')
-
-
-
 
 #print('-----------------AQUI SE EMPIEZAN A GENERAR LOS QR----------------------')
 
@@ -833,10 +840,10 @@ pdf=PDF()
 pdf.add_page()
 pdf.logo('pruebas/img.png',0,0,60,15)
 
-pdf.image('pruebas/imagenes/hola1.png',5,20,20,20)
-pdf.image('pruebas/imagenes/hola2.png',25,20,20,20)
-pdf.image('pruebas/imagenes/hola3.png',45,20,20,20)
-pdf.image('pruebas/imagenes/hola4.png',65,20,20,20)
+pdf.image('pruebas/imagenes/x.png',5,20,20,20)
+pdf.image('pruebas/imagenes/x.png',25,20,20,20)
+pdf.image('pruebas/imagenes/x.png',45,20,20,20)
+"""pdf.image('pruebas/imagenes/hola4.png',65,20,20,20)
 pdf.image('pruebas/imagenes/hola5.png',85,20,20,20)
 pdf.image('pruebas/imagenes/hola6.png',105,20,20,20)
 pdf.image('pruebas/imagenes/hola7.png',125,20,20,20)
@@ -974,6 +981,6 @@ pdf.image('pruebas/imagenes/hola126.png',105,260,20,20)
 pdf.image('pruebas/imagenes/hola127.png',125,260,20,20)
 pdf.image('pruebas/imagenes/hola128.png',145,260,20,20)
 pdf.image('pruebas/imagenes/hola129.png',165,260,20,20)
-pdf.image('pruebas/imagenes/hola130.png',185,260,20,20)
+pdf.image('pruebas/imagenes/hola130.png',185,260,20,20)"""
 #print('-----------------TERMINA TRECEAVO BLOQUE----------------------')
 pdf.output('QR.pdf', 'F')
