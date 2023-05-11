@@ -29,12 +29,12 @@ x=0
 #----------------------img.save("pruebas/imagenes/"x".png")
 qr=QRCode(version=3, box_size=5, border=2)
 
-for i in range(1,4):
+for i in range(1,6):
     qr.add_data(i)
     qr.make(fit=True)
     img=qr.make_image(fill_color=(0,0,0),back_color=(255,255,255))
     x=x+i
-    img.save("pruebas/imagenes/'x'.png")
+    img.save(f"pruebas/imagenes/{i}.png")
     qr.clear()
 
 """qr.add_data(1)
@@ -840,12 +840,12 @@ pdf=PDF()
 pdf.add_page()
 pdf.logo('pruebas/img.png',0,0,60,15)
 
-pdf.image('pruebas/imagenes/x.png',5,20,20,20)
-pdf.image('pruebas/imagenes/x.png',25,20,20,20)
-pdf.image('pruebas/imagenes/x.png',45,20,20,20)
-"""pdf.image('pruebas/imagenes/hola4.png',65,20,20,20)
-pdf.image('pruebas/imagenes/hola5.png',85,20,20,20)
-pdf.image('pruebas/imagenes/hola6.png',105,20,20,20)
+pdf.image(f'pruebas/imagenes/{i}.png',5,20,20,20)
+pdf.image(f'pruebas/imagenes/{i}.png',25,20,20,20)
+pdf.image(f'pruebas/imagenes/{i}.png',45,20,20,20)
+pdf.image(f'pruebas/imagenes/{i}.png',65,20,20,20)
+pdf.image(f'pruebas/imagenes/{i}.png',85,20,20,20)
+"""pdf.image('pruebas/imagenes/hola6.png',105,20,20,20)
 pdf.image('pruebas/imagenes/hola7.png',125,20,20,20)
 pdf.image('pruebas/imagenes/hola8.png',145,20,20,20)
 pdf.image('pruebas/imagenes/hola9.png',165,20,20,20)
@@ -983,4 +983,6 @@ pdf.image('pruebas/imagenes/hola128.png',145,260,20,20)
 pdf.image('pruebas/imagenes/hola129.png',165,260,20,20)
 pdf.image('pruebas/imagenes/hola130.png',185,260,20,20)"""
 #print('-----------------TERMINA TRECEAVO BLOQUE----------------------')
+
+
 pdf.output('QR.pdf', 'F')
