@@ -1,61 +1,83 @@
 import pyodbc
 
-# create a connection string
-# cnxn_str = "Driver={SQL Server};Server=localhost;Database=db_odoo;Trusted_Connection=yes;"
-cnxn_str = (
-        "Driver={Devart ODBC Driver for xBase};"
-        "DBFFormat=VisualFoxPro;"
-        "CollatingSequence=general;"
-        "UID='';"
-        "PWD='';"
-        "Database=C:/WinMAGI/DATA/;"
-    )
+# Configuración de la conexión a la base de datos
+server = 'rdsh-0'
+database = 'PROD'
+username = ''
+password = ''
 
-# conexion y cursor VFP
-cnxn = pyodbc.connect(cnxn_str)
-cursor = cnxn.cursor()
+# Crear cadena de conexión
+connection_string = 'DRIVER={ODBC Driver 17 for SQL Server};SERVER=' + server + ';DATABASE=' + database + ';UID=' + username + ';PWD=' + password
 
-# conexion y cursor SQL
-conn = pyodbc.connect('DSN=OdooSQL;Trusted_Connection=yes;Database=PROD;')
-cursorSQL = conn.cursor()
+# Establecer conexión con la base de datos
+connection = pyodbc.connect(connection_string)
 
-cursor.execute("SELECT * FROM ltxnhist") #NOMBRE DE LA TABLA EN winmagi
-rows = cursor.fetchall()[:5]
+# Crear un cursor para ejecutar comandos SQL
+cursor = connection.cursor()
 
-cursorSQL.execute("TRUNCATE TABLE dbo.historico")#NOMBRE DE LA TABLA EN mssql
-cursorSQL.commit()
+# Ejecutar una consulta SELECT para obtener los datos de la tabla origen
+select_query = 'SELECT clock,logondate,logoffdate,date,shift,mono,lineitem,pn,opnseq,actsu,actrun,actlab,pieces,scrap,wc,wcmach,opndesc,cslab,csfod,csvod,cspsvc,labcode,direct,complete,userid,rate,flushlab,pursvc,manual,source,moldid,entrytype,remarks,glbatch,posted,dateposted,costreval,transno,acctdiv,txndate,rcptno,setup,labmulti,labmutype,lot,FROM dbo.ltxnhist'
+cursor.execute(select_query)
 
-# Nombres de los campos
-num_cols = 5  # número de columnas que deseas recuperar
-columns = [column[0] for column in cursor.description[:num_cols]]
-print("----------->",columns)
+# Recuperar los resultados
+resultados = cursor.fetchall()
 
-n=1
-for row in rows:
-     print("",n,"  -------------> ",row)
-     cursorSQL.execute("INSERT INTO dbo.historico (CLOCK,LOGONDATE,LOGOFFDATE,DATE,SHIFT,MONO,LINEITEM,PN,OPNSEQ,ACTSU,ACTRUN,ACTLAB,PIECES,SCRAP,WC,WCMACH,OPNDESC,CSLAB,CSFOD,CSVOD,CSPSVC,LABCODE,DIRECT,COMPLETE,USERID,RATE,FLUSHLAB,PURSVC,MANUAL,SOURCE,MOLDID,ENTRYTYPE,REMARKS,GLBATCH,POSTED,DATEPOSTED,COSTREVAL,TRANSNO,ACCTDIV,TXNDATE,RCPTNO,SETUP,LABMULTI,LABMUTYPE,LOT) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",row[0],row[1],row[2],row[3],row[4],row[5],row[6],row[7],row[8], row[9], row[10],row[11],row[12],row[13],row[14],row[15],row[16],row[17],row[18],row[19], row[20], row[21], row[22],row[23],row[24],row[25],row[26],row[27],row[28],row[29],row[30], row[31], row[32], row[33],row[34],row[35],row[36],row[37],row[38],row[39],row[40],row[41],row[42], row[43],row[44])
+# Iterar por los resultados y ejecutar una consulta INSERT para insertarlos en la tabla destino
+for resultado in resultados:
+
+    clock = resultado[0]
+    logondate= resultado[1]
+    logoffdate= resultado[2]
+    date= resultado[3]
+    shift= resultado[4]
+    mono= resultado[5]
+    lineitem= resultado[6]
+    pn= resultado[7]
+    opnseq= resultado[8]
+    actsu= resultado[9]
+    actrun= resultado[10]
+    actlab= resultado[11]
+    pieces= resultado[12]
+    scrap= resultado[13]
+    wc= resultado[14]
+    wcmach= resultado[15]
+    opndesc= resultado[16]
+    cslab= resultado[17]
+    csfod= resultado[18]
+    csvod= resultado[19]
+    cspsvc= resultado[20]
+    labcode= resultado[21]
+    direct= resultado[22]
+    complete= resultado[23]
+    userid= resultado[24]
+    rate= resultado[25]
+    flushlab= resultado[26]
+    pursvc= resultado[27]
+    manual= resultado[28]
+    source= resultado[29]
+    moldid= resultado[30]
+    entrytype= resultado[31]
+    remarks= resultado[32]
+    glbatch= resultado[33]
+    posted= resultado[34]
+    dateposted= resultado[35]
+    costreval= resultado[36]
+    transno= resultado[37]
+    acctdiv= resultado[38]
+    txndate= resultado[39]
+    rcptno= resultado[40]
+    setup= resultado[41]
+    labmulti= resultado[42]
+    labmutype= resultado[43]
+    lot= resultado[44]
     
-     # cursorSQL.execute("INSERT INTO dbo.ltxnhist (clock,logondate,logoffdate,date,shift,mono,lineitem,pn,opnseq,actsu,actrun,actlab,pieces,scrap,wc,wcmach,opndesc,cslab,csfod,csvod,cspsvc,labcode,direct,complete,userid,rate,flushlab,pursvc,manual,source,moldid,entrytype,remarks,glbatch,posted,dateposted,costreval,transno,acctdiv,txndate,rcptno,setup,labmulti,labmutype,lot,) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",row[0],row[1],row[2],row[3],row[4],row[5],row[6],row[7],row[8], row[9], row[10],row[11],row[12],row[13],row[14],row[15],row[16],row[17],row[18],row[19], row[20], row[21], row[22],row[23],row[24],row[25],row[26],row[27],row[28],row[29],row[30], row[31], row[32], row[33],row[34],row[35],row[36],row[37],row[38],row[39],row[40],row[41],row[42], row[43],row[44]) 
-     # cursorSQL.execute("INSERT INTO dbo.ltxnhist (clock,logondate) VALUES (?,?)",row[0],row[1])
-   
-     n+=1
-cursorSQL.commit()
 
+    insert_query = 'INSERT INTO dbo.historico (clock,logondate,logoffdate,date,shift,mono,lineitem,pn,opnseq,actsu,actrun,actlab,pieces,scrap,wc,wcmach,opndesc,cslab,csfod,csvod,cspsvc,labcode,direct,complete,userid,rate,flushlab,pursvc,manual,source,moldid,entrytype,remarks,glbatch,posted,dateposted,costreval,transno,acctdiv,txndate,rcptno,setup,labmulti,labmutype,lot) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)'
+    cursor.execute(insert_query, clock,logondate,logoffdate,date,shift,mono,lineitem,pn,opnseq,actsu,actrun,actlab,pieces,scrap,wc,wcmach,opndesc,cslab,csfod,csvod,cspsvc,labcode,direct,complete,userid,rate,flushlab,pursvc,manual,source,moldid,entrytype,remarks,glbatch,posted,dateposted,costreval,transno,acctdiv,txndate,rcptno,setup,labmulti,labmutype,lot)
 
-###########################    TABLA MOMAST    ###################################
+# Guardar los cambios
+connection.commit()
 
-
-
-# for r in sale_order:
-#     cursor.execute("INSERT INTO sale_order (id,Number,CreationDate,Customer_id,Customer,Company_id,Company,Total,Status,DeliveryDate,ExpectedDate,Website,team_id,SalesTeam,UntaxedAmount,Taxes,InvoiceStatus) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",r["id"],r["name"],r["create_date"],r["partner_id"][0],r["partner_id"][1],r["company_id"][0],r["company_id"][1],r["amount_total"],r["state"],nz(r["commitment_date"],None),nz(r["expected_date"],None),r["website_id"],r["team_id"][0],r["team_id"][1],r["amount_untaxed"],r["amount_tax"],r["invoice_status"]) 
-#     # print(r)
-#     # print(nz(r["tag_ids"],None))
-# cursor.commit()
-
-# cerrar cursor y conexion SQL
-cursorSQL.close()
-conn.close()
-
-# cerrar cursor y conexion VFP
+# Cerrar el cursor y la conexión a la base de datos
 cursor.close()
-cnxn.close()
+connection.close()
