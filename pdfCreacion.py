@@ -33,9 +33,9 @@ for i in range(1,6):
     qr.add_data(i)
     qr.make(fit=True)
     img=qr.make_image(fill_color=(0,0,0),back_color=(255,255,255))
-    x=x+i
     img.save(f"pruebas/imagenes/{i}.png")
     qr.clear()
+    x=x+i
 
 """qr.add_data(1)
 qr.make(fit=True)
@@ -840,11 +840,11 @@ pdf=PDF()
 pdf.add_page()
 pdf.logo('pruebas/img.png',0,0,60,15)
 
-pdf.image(f'pruebas/imagenes/{i}.png',5,20,20,20)
-pdf.image(f'pruebas/imagenes/{i}.png',25,20,20,20)
-pdf.image(f'pruebas/imagenes/{i}.png',45,20,20,20)
-pdf.image(f'pruebas/imagenes/{i}.png',65,20,20,20)
-pdf.image(f'pruebas/imagenes/{i}.png',85,20,20,20)
+pdf.image(f'pruebas/imagenes/{x}.png',5,20,20,20)
+pdf.image(f'pruebas/imagenes/{x}.png',25,20,20,20)
+pdf.image(f'pruebas/imagenes/{x}.png',45,20,20,20)  
+pdf.image(f'pruebas/imagenes/{x}.png',65,20,20,20)
+pdf.image(f'pruebas/imagenes/{x}.png',85,20,20,20)
 """pdf.image('pruebas/imagenes/hola6.png',105,20,20,20)
 pdf.image('pruebas/imagenes/hola7.png',125,20,20,20)
 pdf.image('pruebas/imagenes/hola8.png',145,20,20,20)
