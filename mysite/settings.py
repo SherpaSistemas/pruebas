@@ -20,14 +20,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-b)ef40zg4q0n7fm9l&d)qqh(tsuc4q9&kp@&+ze6p!4s5k0-he'
+SECRET_KEY = 'django-insecure-etd!#&-ousq19203%r4a7y*^p9nr-4_xtgxywuvg!4v*$_cx5d'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
-STATICFILES_DIRS=['C:/Users/uriel/Documents/pruebasDjango/vistas/static/']
 
 
 # Application definition
@@ -56,7 +54,7 @@ ROOT_URLCONF = 'mysite.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['C:/Users/uriel/Documents/pruebasDjango/vistas'],
+        'DIRS': ['C:/Users/uriel/Documents/pruebas/vistas'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -117,7 +115,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = 'static/css/style.css/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
