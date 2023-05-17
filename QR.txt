@@ -1,0 +1,7 @@
+# rama feature/QR 
+# se eliminaron clases inutilizables
+>>>>>>> e8a16e1074f2ff1941344087139bc08fe5b8fbd9
+----------A la clase pdfCreacion.py ya se le asigno el metodo que basia un QR para que no otro valor que no sea el que se le asiga y a los codigos
+que genera ya se les hicieron pruebas, al momento no hay errores y esta clase ya esta lista para unirse al proyecto principal.-------------
+
+#cofii
