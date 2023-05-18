@@ -1,81 +1,32 @@
 import pyodbc
 
-# Configuración de la conexión a la base de datos
-server = 'localhost'
-database = 'PROD'
-username = ''
-password = ''
+# Configurar la cadena de conexión
+conn_str = 'Driver={SQL Server};Server=localhost;Database=PROD;Trusted_Connection=yes;'
 
-# Crear cadena de conexión
-connection_string = 'DRIVER={ODBC Driver 17 for SQL Server};SERVER=' + server + ';DATABASE=' + database + ';UID=' + username + ';PWD=' + password
+# Establecer la conexión
+conn = pyodbc.connect(conn_str)
 
-# Establecer conexión con la base de datos
-connection = pyodbc.connect(connection_string)
+# Crear cursores para las dos bases de datos
+cursor_origen = conn.cursor()  # Cursor para la base de datos de origen
+cursor_destino = conn.cursor()  # Cursor para la base de datos de destino
 
-# Crear un cursor para ejecutar comandos SQL
-cursor = connection.cursor()
+# Consulta de selección en la tabla de origen
+cursor_origen.execute('SELECT * FROM ltxnhist')
 
-# Ejecutar una consulta SELECT para obtener los datos de la tabla origen
-select_query = 'SELECT clock,logondate,logoffdate,date,shift,mono,lineitem,pn,opnseq,actsu,actrun,actlab,pieces,scrap,wc,wcmach,opndesc,cslab,csfod,csvod,cspsvc,labcode,direct,complete,userid,rate,flushlab,pursvc,manual,source,moldid,entrytype,remarks,glbatch,posted,dateposted,costreval,transno,acctdiv,txndate,rcptno,setup,labmulti,labmutype,lot FROM dbo.ltxnhist'
-cursor.execute(select_query)
+# Recuperar los datos de la tabla de origen
+datos_origen = cursor_origen.fetchall()[:5]
+cursor_origen.execute("TRUNCATE TABLE historico")#NOMBRE DE LA TABLA EN mssql
+cursor_origen.commit()
 
-# Recuperar los resultados
-resultados = cursor.fetchall()
+# Insertar los datos en la tabla de destino
+for fila in datos_origen:
+    cursor_destino.execute('INSERT INTO historico (clock,logondate,logoffdate,date,shift,mono,lineitem,pn,opnseq,actsu,actrun,actlab,pieces,scrap,wc,wcmach,opndesc,cslab,csfod,csvod,cspsvc,labcode,direct,complete,userid,rate,flushlab,pursvc,manual,source,moldid,entrytype,remarks,glbatch,posted,dateposted,costreval,transno,acctdiv,txndate,rcptno,setup,labmulti,labmutype,lot) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',
+                           fila.clock, fila.logondate, fila.logoffdate,fila.date, fila.shift, fila.mono, fila.lineitem, fila.pn, fila.opnseq, fila.actsu, fila.actrun, fila.actlab, fila.pieces, fila.scrap, fila.wc, fila.wcmach, fila.opndesc, fila.cslab, fila.csfod, fila.csvod, fila.cspsvc, fila.labcode, fila.direct, fila.complete, fila.userid, fila.rate, fila.flushlab, fila.pursvc, fila.manual, fila.source, fila.moldid, fila.entrytype, fila.remarks, fila.glbatch, fila.posted, fila.dateposted, fila.costreval, fila.transno, fila.acctdiv, fila.txndate, fila.rcptno, fila.setup, fila.labmulti, fila.labmutype, fila.lot)
 
-# Iterar por los resultados y ejecutar una consulta INSERT para insertarlos en la tabla destino
-for resultado in resultados:
+# Confirmar los cambios en la base de datos de destino
+conn.commit()
 
-    clock = resultado[0]
-    logondate= resultado[1]
-    logoffdate= resultado[2]
-    date= resultado[3]
-    shift= resultado[4]
-    mono= resultado[5]
-    lineitem= resultado[6]
-    pn= resultado[7]
-    opnseq= resultado[8]
-    actsu= resultado[9]
-    actrun= resultado[10]
-    actlab= resultado[11]
-    pieces= resultado[12]
-    scrap= resultado[13]
-    wc= resultado[14]
-    wcmach= resultado[15]
-    opndesc= resultado[16]
-    cslab= resultado[17]
-    csfod= resultado[18]
-    csvod= resultado[19]
-    cspsvc= resultado[20]
-    labcode= resultado[21]
-    direct= resultado[22]
-    complete= resultado[23]
-    userid= resultado[24]
-    rate= resultado[25]
-    flushlab= resultado[26]
-    pursvc= resultado[27]
-    manual= resultado[28]
-    source= resultado[29]
-    moldid= resultado[30]
-    entrytype= resultado[31]
-    remarks= resultado[32]
-    glbatch= resultado[33]
-    posted= resultado[34]
-    dateposted= resultado[35]
-    costreval= resultado[36]
-    transno= resultado[37]
-    acctdiv= resultado[38]
-    txndate= resultado[39]
-    rcptno= resultado[40]
-    setup= resultado[41]
-    labmulti= resultado[42]
-    labmutype= resultado[43]
-    lot= resultado[44]
-    
-    cursor.execute(" INSERT INTO dbo.historico (clock,logondate,logoffdate,date,shift,mono,lineitem,pn,opnseq,actsu,actrun,actlab,pieces,scrap,wc,wcmach,opndesc,cslab,csfod,csvod,cspsvc,labcode,direct,complete,userid,rate,flushlab,pursvc,manual,source,moldid,entrytype,remarks,glbatch,posted,dateposted,costreval,transno,acctdiv,txndate,rcptno,setup,labmulti,labmutype,lot) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ", clock,logondate,logoffdate,date,shift,mono,lineitem,pn,opnseq,actsu,actrun,actlab,pieces,scrap,wc,wcmach,opndesc,cslab,csfod,csvod,cspsvc,labcode,direct,complete,userid,rate,flushlab,pursvc,manual,source,moldid,entrytype,remarks,glbatch,posted,dateposted,costreval,transno,acctdiv,txndate,rcptno,setup,labmulti,labmutype,lot)
-
-# Guardar los cambios
-connection.commit()
-
-# Cerrar el cursor y la conexión a la base de datos
-cursor.close()
-connection.close()
+# Cerrar los cursores y la conexión
+cursor_origen.close()
+cursor_destino.close()
+conn.close()
