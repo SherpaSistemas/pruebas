@@ -29,6 +29,9 @@ DEBUG = True
 ALLOWED_HOSTS = []
  
 STATICFIELS_DIRS=['C:/Users/uriel/Documents/pruebas/mysite/static/css']
+ 
+# STATICFIELS_DIRS=['C:\TEST\PROD\pruebas\pruebas\mysite\static\css']
+
 
 # Application definition
  
@@ -58,6 +61,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': ['C:/Users/uriel/Documents/pruebas/vistas'],
+        # 'DIRS': ['C:\TEST\PROD\pruebas\pruebas/vistas'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
